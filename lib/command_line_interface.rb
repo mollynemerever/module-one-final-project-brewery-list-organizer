@@ -1,15 +1,11 @@
 #this file holds methods that print out to the CLI
-require 'pry'
-require_relative "../config/environment.rb"
-#create new user
-# t.string :username
-# t.string :name
-# t.integer :age
-# t.string :user_location
-# t.string :favorite_beer
-puts "test"
+# require 'pry'
+# require_relative "../config/environment.rb"
+
+puts "You're in command_line_interface.rb"
 
 def create_new_user
+
   puts "Please fill out the following account info:"
   puts "Username?"
   username = gets.chomp
@@ -23,10 +19,6 @@ def create_new_user
   puts "Favorite Beer?"
   favorite_beer = gets.chomp
 
-  # puts username
-  # puts name
-  # puts age
-
    user_object = User.create({
     username: username,
     name: name,
@@ -36,4 +28,4 @@ def create_new_user
     })
 
 end
-Pry.start
+# Pry.start

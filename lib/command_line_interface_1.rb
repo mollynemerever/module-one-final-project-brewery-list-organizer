@@ -1,4 +1,6 @@
-require 'pry'
+
+puts "You're in command_line_interface_1.rb"
+
 def welcome
   puts "Welcome to your Brewery List Organizer!"
   are_you_a_user
@@ -23,16 +25,17 @@ def what_to_do
   puts "Please enter your username!"
   input = gets.chomp
   puts "So #{input}, what whould you like to do?"
-    puts "press 1 to search menu"
-    puts "press 2 to see your wishlist"
-    puts "press 3  to GTFO of 'ere"
+  puts "press 1 to search menu"
+  puts "press 2 to see your wishlist"
+  puts "press 3  to GTFO of 'ere"
   input1 = gets.chomp
   if input1 == "1"
     search_menu
   elsif input1 == "2"
     display_wishlist
   elsif input1 == "3"
-    puts "good-bye"
+    puts "Happy Brewing!
+          good-bye"
     exit
   else
     what_to_do
@@ -80,15 +83,11 @@ def display_wishlist
 end
 
 def search_breweries_by_city
-  puts "What city do you want to search by?"
-  input = gets.chomp
-  input.downcase
-  breweries.name.downcase.include?("")
+
 end
 
 def serach_breweries_by_state
-  puts "What state do you want to search by?"
-  input = gets.chomp
+
 end
 
 def search_breweries_by_type
@@ -105,4 +104,5 @@ def search_breweries_by_postalcode
   puts "What Postal Code do you want to search by?"
   input = gets.chomp
 end
-Pry.start
+
+# Pry.start
