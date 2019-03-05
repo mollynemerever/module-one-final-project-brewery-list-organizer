@@ -24,7 +24,6 @@ url = "https://api.openbrewerydb.org/breweries?page="
         website_url: brewery["website_url"]
     })
   end
-
 end
 
 
