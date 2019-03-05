@@ -1,7 +1,6 @@
-class CreateBrewerysTable < ActiveRecord::Migration[4.2]
-
+class CreateBrewerysTable < ActiveRecord::Migration
   def change
-    create_table :brewery do |t|
+    create_table :breweries do |t|
       t.string :name
       t.string :brewery_type
       t.string :street
@@ -10,7 +9,5 @@ class CreateBrewerysTable < ActiveRecord::Migration[4.2]
       t.string :postal_code
       t.string :phone
       t.string :website_url
-    end
   end
-
 end
