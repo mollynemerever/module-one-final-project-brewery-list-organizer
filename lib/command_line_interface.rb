@@ -35,5 +35,4 @@ def create_new_user
     })
 
 end
-
-# Pry.start
+Pry.start
