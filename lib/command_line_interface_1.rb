@@ -82,6 +82,8 @@ end
 def search_breweries_by_city
   puts "What city do you want to search by?"
   input = gets.chomp
+  input.downcase
+  breweries.name.downcase.include?("")
 end
 
 def serach_breweries_by_state
