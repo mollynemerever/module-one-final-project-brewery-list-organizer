@@ -1,8 +1,15 @@
 #this file holds methods that print out to the CLI
-# require 'pry'
-# require_relative "../config/environment.rb"
+
 
 puts "You're in command_line_interface.rb"
+
+
+
+require 'pry'
+require_relative "../config/environment.rb"
+
+puts "test"
+
 
 def create_new_user
 
@@ -28,4 +35,5 @@ def create_new_user
     })
 
 end
+
 # Pry.start
