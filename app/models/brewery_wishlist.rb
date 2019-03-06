@@ -1,7 +1,4 @@
-class Brewery_Wishlist < ActiveRecord::Base
-
-#method to display brewery wishlist 
-
+class BreweryWishlist < ActiveRecord::Base
 end
 
 #this file holds the class for brewery wishlist

@@ -1,11 +1,6 @@
 #will hold brewery data from API
-
-# require 'rest-client'
-# require 'json'
-# require 'pry'
 require_relative "../config/environment.rb"
 Brewery.destroy_all
-
 
 url = "https://api.openbrewerydb.org/breweries?page="
 
@@ -27,4 +22,4 @@ url = "https://api.openbrewerydb.org/breweries?page="
 end
 
 
-#Pry.start
+# Pry.start
