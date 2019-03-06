@@ -83,16 +83,35 @@ require_relative "../config/environment.rb"
 def search_breweries_by_city
   puts "What city do you want to search by? (capitalize first letter)"
   city_input = gets.chomp #go back and revise to acoomodate up/downcase
-  breweries_by_city = Brewery.where(city: city_input)
-  breweries_by_city.type 
+  breweries_by_city = Brewery.where(city: city_input) # is an array
+  puts "Results Below:"
+  i = 1
+  while i < breweries_by_city.length do
+    breweries_by_city.each do |brewery|
+      puts "#{i}. #{brewery.inspect}"
+      i += 1  #print out brewery in numbered list
+    end
+  end
+
+
 end
 
+def to_s
+
+end
 
 def search_breweries_by_state
   puts "What state do you want to search by? (full name & capitalization)"
   state_input = gets.chomp #go back and revise to accomodate abbreviations
   breweries_by_state = Brewery.where(state: state_input)
-  breweries_by_state
+  puts "Results Below:"
+  i = 1
+  while i < breweries_by_state.length do
+    breweries_by_state.each do |brewery|
+      puts "#{i}.  #{brewery.inspect}" #prints breweries in numbered list
+      i += 1
+    end
+  end
 end
 
 
@@ -101,8 +120,18 @@ def search_breweries_by_name
   puts "What's the brewery name you want to search for?"
   name_input = gets.chomp #go back and revise to acoomodate abbreviations
   breweries_by_name = Brewery.where(name: name_input)
-  breweries_by_name
+  puts "Results Below:"
+  i = 1
+  while i <= breweries_by_name.length do
+    breweries_by_name.each do |brewery|
+      puts "#{i}.  #{brewery.inspect}"
+      i += 1
+    end
+  end
 end
+
+
+
 
 def create_new_user
   puts "Please fill out the following account info:"
