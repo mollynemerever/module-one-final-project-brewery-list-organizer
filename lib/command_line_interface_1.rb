@@ -1,5 +1,9 @@
 require 'pry'
 require_relative "../config/environment.rb"
+
+@current_user_id = nil
+@brewery_id_to_add = nil
+
 def welcome
   puts "Welcome to your Brewery List Organizer!"
   are_you_a_user
@@ -75,7 +79,6 @@ end
 def display_wishlist
   puts "Here's your wishlist!"
 
-  #brewerylists.
   #we need to save the username input from the earlier welcome method in oreder
   #to be used to search the brewery list db for the users list.
   #We need to make this database!!
@@ -137,9 +140,21 @@ def search_breweries_by_name
     end
   end
   brewery_index = get_brewery_selection #call add to wishlist method
-  brewery_id_to_add = breweries_by_name[brewery_index]["id"] #access the brewery
+  @brewery_id_to_add = breweries_by_name[brewery_index]["id"] #access the brewery
 end
 
+#
+# puts "Do you want to add a brewery to your breweries wishlist?(y/n)"
+# input = gets.chomp
+# if input.downcase == "y"|| input.downcase == "yes"|| input.downcase == "yES"|| input.downcase == "yeS"
+#   add_to_wishlist
+# elsif input.downcase == "n"|| input.downcase == "no"|| input.downcase == "nO"
+#   what_to_do
+# else
+#   puts "Does-nert-compert/
+#   enter a valid option! zeep-berp-pop"
+#   search_breweries_by_name
+# end
 
 
 
@@ -157,10 +172,6 @@ def create_new_user
   puts "Favorite Beer?"
   favorite_beer = gets.chomp
 
-  # puts username
-  # puts name
-  # puts age
-
    user_object = User.create({
     username: username,
     name: name,
@@ -168,7 +179,16 @@ def create_new_user
     user_location: user_location,
     favorite_beer: favorite_beer
     })
+    @current_user_id = user_object.id
+end
 
+
+
+def add_to_wishlist
+  BreweryWishlist.create({
+    user_id: @current_user_id
+    brewery_id: @brewery_id_add
+    })
 end
 
 
