@@ -78,11 +78,7 @@ end
 
 def display_wishlist
   puts "Here's your wishlist!"
-<<<<<<< HEAD
-=======
 
-  #brewerylists.
->>>>>>> d2fccaf5ad80d9849049bda57c82102a0749747d
   #we need to save the username input from the earlier welcome method in oreder
   #to be used to search the brewery list db for the users list.
   #We need to make this database!!
@@ -144,7 +140,7 @@ def search_breweries_by_name
     end
   end
   brewery_index = get_brewery_selection #call add to wishlist method
-  brewery_id_to_add = breweries_by_name[brewery_index]["id"] #access the brewery
+  @brewery_id_to_add = breweries_by_name[brewery_index]["id"] #access the brewery
 end
 
 #
