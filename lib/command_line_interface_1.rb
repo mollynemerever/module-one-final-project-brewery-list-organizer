@@ -78,9 +78,21 @@ end
 
 def display_wishlist
   puts "Here's your wishlist!"
+<<<<<<< HEAD
+=======
+
+  #brewerylists.
+>>>>>>> d2fccaf5ad80d9849049bda57c82102a0749747d
   #we need to save the username input from the earlier welcome method in oreder
   #to be used to search the brewery list db for the users list.
   #We need to make this database!!
+end
+
+def get_brewery_selection #would user like to add a brewery to their wishlist
+  puts "To add a brewery to your wishlist, type the brewery's number"
+  user_choice = gets.chomp  #integer
+  index = user_choice.to_i - 1
+  index
 end
 
 def search_breweries_by_city
@@ -96,11 +108,10 @@ def search_breweries_by_city
       i += 1  #print out brewery in numbered list
     end
   end
+  brewery_index = get_brewery_selection #call add to wishlist method
+  brewery_id_to_add = breweries_by_city[brewery_index]["id"] #access the brewery
 end
 
-# def to_s
-#
-# end
 
 def search_breweries_by_state
   puts "What state do you want to search by? (full name & capitalization)"
@@ -114,6 +125,8 @@ def search_breweries_by_state
       i += 1
     end
   end
+  brewery_index = get_brewery_selection #call add to wishlist method
+  brewery_id_to_add = breweries_by_state[brewery_index]["id"] #access the brewery
 end
 
 
@@ -130,19 +143,22 @@ def search_breweries_by_name
       i += 1
     end
   end
-  puts "Do you want to add a brewery to your breweries wishlist?(y/n)"
-  input = gets.chomp
-  if input.downcase == "y"|| input.downcase == "yes"|| input.downcase == "yES"|| input.downcase == "yeS"
-    add_to_wishlist
-  elsif input.downcase == "n"|| input.downcase == "no"|| input.downcase == "nO"
-    what_to_do
-  else
-    puts "Does-nert-compert/
-    enter a valid option! zeep-berp-pop"
-    search_breweries_by_name
-  end
+  brewery_index = get_brewery_selection #call add to wishlist method
+  brewery_id_to_add = breweries_by_name[brewery_index]["id"] #access the brewery
 end
 
+#
+# puts "Do you want to add a brewery to your breweries wishlist?(y/n)"
+# input = gets.chomp
+# if input.downcase == "y"|| input.downcase == "yes"|| input.downcase == "yES"|| input.downcase == "yeS"
+#   add_to_wishlist
+# elsif input.downcase == "n"|| input.downcase == "no"|| input.downcase == "nO"
+#   what_to_do
+# else
+#   puts "Does-nert-compert/
+#   enter a valid option! zeep-berp-pop"
+#   search_breweries_by_name
+# end
 
 
 
@@ -171,10 +187,13 @@ def create_new_user
 end
 
 
-# def add_to_wishlist
-#   BreweryWishlist.create ({
-#     user_id: @current_user_id
-#     brewery_id: @brewery_id_add
-#     })
-#   end
-# end
+
+def add_to_wishlist
+  BreweryWishlist.create({
+    user_id: @current_user_id
+    brewery_id: @brewery_id_add
+    })
+end
+
+
+Pry.start
