@@ -84,10 +84,7 @@ end
 def search_breweries_by_city
   puts "What city do you want to search by? (capitalize first letter)"
   city_input = gets.chomp #go back and revise to acoomodate up/downcase
-<<<<<<< HEAD
-  breweries_by_city = Brewery.where(city: city_input)
-  breweries_by_city.type
-=======
+
   breweries_by_city = Brewery.where(city: city_input) # is an array
   puts "Results Below:"
   i = 1
@@ -99,7 +96,7 @@ def search_breweries_by_city
   end
 
 
->>>>>>> e1d650fc99e94c6ff45b6b3eb3f9dcc3093264d5
+
 end
 
 def to_s
