@@ -12,4 +12,23 @@
 
 ActiveRecord::Schema.define(version: 2) do
 
+  create_table "breweries", force: :cascade do |t|
+    t.string "name"
+    t.string "brewery_type"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.string "phone"
+    t.string "website_url"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string  "username"
+    t.string  "name"
+    t.integer "age"
+    t.string  "user_location"
+    t.string  "favorite_beer"
+  end
+
 end

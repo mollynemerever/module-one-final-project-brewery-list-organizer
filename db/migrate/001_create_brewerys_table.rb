@@ -11,3 +11,4 @@ class CreateBrewerysTable < ActiveRecord::Migration
       t.string :website_url
   end
 end
+end 
