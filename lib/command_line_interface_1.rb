@@ -27,7 +27,7 @@ def what_to_do
   puts "Oh hi again! Thanks for coming back!"
   puts "Please enter your username!"
   input = gets.chomp
-  puts "So #{input}, what whould you like to do?"
+  puts "So #{input}, what would you like to do?"
     puts "press 1 to search menu"
     puts "press 2 to see your wishlist"
     puts "press 3  to GTFO of 'ere"
@@ -51,37 +51,59 @@ def search_menu
 
           Press 2 to search by state
 
-          Press 3 to search by brewery type
-
-          Press 4 to search by brewery name
-
-          Press 5 to search by brewery postal code"
+          Press 3 to search by brewery name"
 
   input = gets.chomp
 
   if input == "1"
     search_breweries_by_city
   elsif input == "2"
-    serach_breweries_by_state
-  elsif input == "3"
-    search_breweries_by_type
-  elsif input == "4"
+    search_breweries_by_state
+  elsif input == "2"
     search_breweries_by_name
-  elsif input == "5"
-    search_breweries_by_postalcode
   else
-    puts "Sorry I counldn't understand that...**mumble-grumble** please enter
+    puts "Sorry I couldn't understand that...**mumble-grumble** please enter
     somthing from the selection menu."
     search_menu
   end
 end
 
-def display_wishlist
-  puts "Here's your wishlist!"
 
-  #we need to save the username input from the earlier welcome method in oreder
-  #to be used to search the brewery list db for the users list.
-  #We need to make this database!!
+
+def get_wishlist  #creates a wishlist for the user
+  puts "Getting Wishlist..."
+  wishlist_array = [] #holds all brewery information for wishlist
+  user_wishlist = BreweryWishlist.where(user_id: @current_user_id) #array of users wishlist
+
+  user_wishlist.each do |brewery_object|
+    id_inquestion = brewery_object["brewery_id"]
+    wishlist_array << Brewery.where(id: id_inquestion)
+  end
+   wishlist_array
+end
+
+def display_wishlist  #prints out the wishlist for the user
+  wishlist = get_wishlist
+  puts "have wishlist"
+  i = 1
+    while i <= wishlist.length do
+      wishlist.each do |brewery|
+        puts "#{i}.  #{brewery.inspect} \n"
+        i += 1
+      end
+    end
+end
+
+def delete_brewery
+  puts "Sad to see you delete a brewery!"
+  brewery_delete = get_brewery_deletion
+end
+
+def get_brewery_deletion
+  puts "Type the number of the brewery you'd like to delete from your wishlist"
+  user_delete_input = gets.chomp
+  index = user_delete_input.to_i - 1
+  index #represents the index of the brewery that should be removed from wishlist
 end
 
 def get_brewery_selection #would user like to add a brewery to their wishlist
@@ -94,13 +116,13 @@ end
 def search_breweries_by_city
   puts "What city do you want to search by? (capitalize first letter)"
   city_input = gets.chomp #go back and revise to acoomodate up/downcase
-
   breweries_by_city = Brewery.where(city: city_input) # is an array
   puts "Results Below:"
   i = 1
   while i < breweries_by_city.length do
     breweries_by_city.each do |brewery|
-      puts "#{i}. #{brewery.inspect}"
+      puts "#{i}. #{brewery.inspect} \n"
+      puts
       i += 1  #print out brewery in numbered list
     end
   end
@@ -117,7 +139,8 @@ def search_breweries_by_state
   i = 1
   while i < breweries_by_state.length do
     breweries_by_state.each do |brewery|
-      puts "#{i}.  #{brewery.inspect}" #prints breweries in numbered list
+      puts "#{i}.  #{brewery.inspect} \n" #prints breweries in numbered list
+      puts
       i += 1
     end
   end
@@ -135,7 +158,8 @@ def search_breweries_by_name
   i = 1
   while i <= breweries_by_name.length do
     breweries_by_name.each do |brewery|
-      puts "#{i}.  #{brewery.inspect}"
+      puts "#{i}.  #{brewery.inspect} \n"
+      puts
       i += 1
     end
   end
@@ -186,7 +210,7 @@ end
 
 def add_to_wishlist
   BreweryWishlist.create({
-    user_id: @current_user_id
+    user_id: @current_user_id,
     brewery_id: @brewery_id_add
     })
 end
