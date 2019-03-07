@@ -1,6 +1,6 @@
 # Brewery List Organizer
 
-Welcome to the Brewery List Organizer! The intent of this application is to help users discover new breweries and add them to their personalized "wishlist". This application runs through your CLI and is connected to a database containing thousands of breweries across the United States.  Users have the ability to search for a brewery based on name, city, or state.  Users can also add a brewery to their wishlist, remove breweries from their wishlist, and view their current wishlist. Happy browsing! 
+Welcome to the Brewery List Organizer! The intent of this application is to help users discover new breweries and add them to their personalized "wishlist". This application runs through your CLI and is connected to a database containing thousands of breweries across the United States.  Users have the ability to search for a brewery based on name, city, or state.  Users can also add a brewery to their wishlist, remove breweries from their wishlist, and view their current wishlist. Happy browsing!
 
 
 ## Getting Started
@@ -9,6 +9,7 @@ Welcome to the Brewery List Organizer! The intent of this application is to help
    -  `bundle install`
    -  `rake db:migrate`
    -  `rake db:seeds` (will populate the brewery database from the API)
+   -  `ruby bin/run.rb` (starts program!)
 
 
 ## API
