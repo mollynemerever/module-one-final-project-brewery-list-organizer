@@ -1,7 +1,7 @@
 require 'pry'
 require_relative "../config/environment.rb"
 
-@current_user_id = nil
+@current_user_id = 3
 @brewery_id_to_add = nil
 
 def welcome
@@ -12,9 +12,9 @@ end
 def are_you_a_user
   puts "Are you a new user?(y/n)"
   input = gets.chomp
-  if input.downcase == "y"|| input.downcase == "yes"|| input.downcase == "yES"|| input.downcase == "yeS"
+  if input.downcase == "y"|| input.downcase == "yes"
     create_new_user
-  elsif input.downcase == "n"|| input.downcase == "no"|| input.downcase == "nO"
+  elsif input.downcase == "n"|| input.downcase == "no"
     what_to_do
   else
     puts "Does-nert-compert/
@@ -77,7 +77,6 @@ end
 
 
 def get_wishlist  #creates a wishlist for the user
-  puts "Getting Wishlist..."
   wishlist_array = [] #holds all brewery information for wishlist
   user_wishlist = BreweryWishlist.where(user_id: @current_user_id) #array of users wishlist
 
@@ -90,7 +89,7 @@ end
 
 def display_wishlist  #prints out the wishlist for the user
   wishlist = get_wishlist
-  puts "have wishlist"
+  puts "Your Wishlist:"
   i = 1
     while i <= wishlist.length do
       wishlist.each do |brewery|
@@ -99,18 +98,23 @@ def display_wishlist  #prints out the wishlist for the user
         i += 1
       end
     end
+    wishlist
 end
 
-def delete_brewery
-  puts "Sad to see you delete a brewery!"
-  brewery_delete = get_brewery_deletion
-end
 
-def get_brewery_deletion
+
+def get_brewery_and_delete #get brewery to delete and delete 
   puts "Type the number of the brewery you'd like to delete from your wishlist"
+  wishlist = display_wishlist
   user_delete_input = gets.chomp
-  index = user_delete_input.to_i - 1
-  index #represents the index of the brewery that should be removed from wishlist
+  index = user_delete_input.to_i - 1 #represents the index of the brewery that should be removed from wishlist
+  puts "Sad to see you delete a brewery!"
+  delete_id = wishlist[index][0]["id"] #brewery id that needs to be removed
+
+  delete_me = BreweryWishlist.where(user_id: @current_user_id, brewery_id: delete_id)
+  BreweryWishlist.destroy(delete_me)
+  puts "Wishlist Updated!"
+  #wishlist_options
 end
 
 def get_brewery_selection #would user like to add a brewery to their wishlist
