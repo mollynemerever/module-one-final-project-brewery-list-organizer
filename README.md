@@ -5,9 +5,9 @@ Welcome to the Brewery List Organizer! The intent of this application is to help
 ## Getting Started
 1. Fork the repository and clone to your computer
 2. Run the following commands through your terminal:
-    a. bundle install
-    b. rake db:migrate
-    c. rake db:seeds (will populate the brewery database from the API)
+   -  `bundle install`
+   -  `rake db:migrate`
+   -  `rake db:seeds` (will populate the brewery database from the API)
 
 
 ## API
@@ -23,10 +23,11 @@ Molly Nemerever - Flatiron School Seattle
 https://github.com/mollynemerever
 
 
+
 ## Contributing
 We welcome contributions! Please feel free to open a pull request or branch from this project.
 
 
-###### Project Notes
+## Project Notes
 This application was the first project during the Flatiron School Software Engineering Immersive program. The project is the capstone of the first model within the cirrciulum. Primary focuses were: Object Oriented programming through Ruby, SQL, ORMs, and the using ActiveRecord. We hope that this project displays our knowledge and proficency in these topics.  
 https://flatironschool.com/
