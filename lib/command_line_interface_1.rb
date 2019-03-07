@@ -24,14 +24,15 @@ def are_you_a_user
         @current_user_id = User.where(username: "#{input}").pluck(:id).first
         what_to_do
       else
-        puts "Does-nert-compert/
-        enter a valid option! zeep-berp-pop"
-        what_to_do
-        # create_new_user
+        puts "Username not found! Are you sure you typed it correctly?"
+        are_you_a_user
       end
   else
-    puts "Does-nert-compert/
-    enter a valid option! zeep-berp-pop"
+    puts "Invalid input
+    Does-nert-compert!
+    zeep-berp-pop
+    please enter 'y' or 'n' "
+    puts
     are_you_a_user
   end
 end
@@ -40,9 +41,9 @@ def what_to_do
     username = User.where(id: "#{@current_user_id}").pluck(:username).first
     puts "So #{username}, what would you like to do?
 
-      Press: 1 to search menu and create a wishlist.
-      Press: 2 to see your wishlist.
-      Press: 3 to exit."
+      Press: 1 to search menu and create a wishlist
+      Press: 2 to see your wishlist
+      Press: 3 to exit"
     input = gets.chomp
     puts
     if input == "1"
@@ -53,19 +54,19 @@ def what_to_do
       puts "Goodbye :)"
       exit
     else
-      puts "Are you already drunk!?
-      Choose from the menu please. :)"
+      puts "Are you already drunk!?  Choose from the menu please. :)"
       what_to_do
     end
 end
 
 def search_menu
-  puts "How would like to search your brewery database?
+  puts "How would like to search our brewery database?
 
   Press: 1 to search by city
   Press: 2 to search by state
   Press: 3 to search by brewery name
-  Press: 4 to exit"
+  Press: 4 to return to main menu
+  Press: 5 to exit"
 
   input = gets.chomp
   puts
@@ -76,10 +77,12 @@ def search_menu
   elsif input == "3"
     search_breweries_by_name
   elsif input == "4"
+    what_to_do
+  elsif input == "5"
     exit
   else
-    puts "Sorry I couldn't understand that...**mumble-grumble** please enter
-    somthing from the selection menu."
+    puts "Sorry I couldn't understand that...**mumble-grumble** please enter something from the selection menu."
+    puts
     search_menu
   end
 end
@@ -98,13 +101,12 @@ end
 
 
 def wishlist_options
-  clear
   puts "What would you like to do next?"
   puts
-  puts "  Press 1 to delete a brewery from your wishlist
-  Press 2 to search brewery database to search or add another brewery to your wishlist
-  Press 3 to go back to main menu
-  Press 4 to exit"
+  puts "  Press: 1 to delete a brewery from your wishlist
+  Press: 2 to search brewery database to search or add another brewery to your wishlist
+  Press: 3 to go back to main menu
+  Press: 4 to exit"
   input = gets.chomp
   puts
   if input == "1"
@@ -118,6 +120,7 @@ def wishlist_options
     exit
   else
     puts "Stop playing around or I'll kick you out!"
+    puts
     wishlist_options
   end
 end
@@ -142,12 +145,12 @@ def display_wishlist  #prints out the wishlist for the user
   end
   puts
   puts
-  # wishlist_options
+  wishlist_options
 end
 
 def get_brewery_and_delete #get brewery to delete and delete
   puts "Type the number of the brewery you'd like to delete from your wishlist"
-    wishlist = display_wishlist
+    wishlist = display_wishlist_for_delete
     user_delete_input = gets.chomp
     puts
     index = user_delete_input.to_i - 1 #represents the index of the brewery that should be removed from wishlist
@@ -157,6 +160,27 @@ def get_brewery_and_delete #get brewery to delete and delete
     BreweryWishlist.destroy(delete_me)
   puts "Wishlist Updated!"
   delete_another?
+end
+
+def display_wishlist_for_delete  #prints out the wishlist for the user
+  wishlist = get_wishlist
+  if wishlist.length >= 1 #checking if user wishlist is populated.
+    puts "Your wishlist:"
+    puts
+    i = 1
+      while i <= wishlist.length do
+        wishlist.each do |brewery|
+          puts "#{i}.  #{brewery.inspect} \n"
+          puts
+          i += 1
+        end
+      end
+  else
+    puts "Your wishlist is empty! Lets browse our brewery database and make one!"
+    search_menu
+  end
+  puts
+  puts
 end
 
 def delete_another?
@@ -175,11 +199,15 @@ def delete_another?
 end
 
 def get_brewery_selection #would user like to add a brewery to their wishlist
-  puts "To add a brewery to your wishlist, type the brewery's number"
+  puts "To add a brewery to your wishlist, type the brewery's number or press 0 to return to search menu:"
   user_choice = gets.chomp  #integer
   puts
-  index = user_choice.to_i - 1
-  index
+    if user_choice == "0"
+      search_menu
+    else
+      index = user_choice.to_i - 1
+      index
+  end
 end
 
 def search_breweries_by_city
@@ -304,7 +332,8 @@ def add_to_wishlist
 end
 
 def add_another?
-  puts "Add another?"
+  puts
+  puts "Search again?(y/n)"
   input = gets.chomp
   if input.downcase == "y" || input.downcase == "yes"
     search_menu
