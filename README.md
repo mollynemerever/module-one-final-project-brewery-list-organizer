@@ -8,9 +8,10 @@ Welcome to the Brewery List Organizer! The intent of this application is to help
 2. Run the following commands through your terminal:
    -  `bundle install`
    -  `rake db:migrate`
-   -  `rake db:seeds` (will populate the brewery database from the API)
+   -  `rake db:seed` (will populate the brewery database from the API)
    -  `ruby bin/run.rb` (starts program!)
 
+note: if you wish to run the program another time, no need to run the first three commands. simply typing `ruby bin/run.rb` will start the program. 
 
 ## API
 This application utilizes the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
