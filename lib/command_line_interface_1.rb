@@ -332,13 +332,17 @@ end
 
 
 def add_to_wishlist
+  if BreweryWishlist.all.where(user_id: @current_user_id, brewery_id: @brewery_id_to_add).count < 1
   BreweryWishlist.create({
     user_id: @current_user_id,
     brewery_id: @brewery_id_to_add
     })
     puts "Wishlist Updated!"
-    puts
     add_another?
+  elsif BreweryWishlist.all.where(user_id: @current_user_id, brewery_id: @brewery_id_to_add).count >= 1
+    puts "You already have that brewery saved on your wishlist"
+    add_another?
+  end
 end
 
 def add_another?
