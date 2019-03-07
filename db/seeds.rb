@@ -2,6 +2,13 @@
 require_relative "../config/environment.rb"
 Brewery.destroy_all
 
+puts "Please be patient while we brew..."
+puts "brewing..."
+puts
+puts "brewing..."
+puts
+puts "brewing..."
+
 url = "https://api.openbrewerydb.org/breweries?page="
 
 (1..161).each do |counter|
