@@ -1,7 +1,7 @@
 require 'pry'
 require_relative "../config/environment.rb"
 
-@current_user_id = 3
+@current_user_id = nil
 @brewery_id_to_add = nil
 
 def welcome
@@ -12,10 +12,20 @@ end
 def are_you_a_user
   puts "Are you a new user?(y/n)"
   input = gets.chomp
-  if input.downcase == "y"|| input.downcase == "yes"
+  if input.downcase == "y"|| input.downcase == "yes"|| input.downcase == "yES"|| input.downcase == "yeS"
     create_new_user
-  elsif input.downcase == "n"|| input.downcase == "no"
-    what_to_do
+  elsif input.downcase == "n"|| input.downcase == "no"|| input.downcase == "nO"
+    puts "Please enter your username!"
+    input = gets.chomp
+      if User.where(username: "#{input}").count >= 1
+        @current_user_id = User.where(username: "#{input}").pluck(:id).first
+        what_to_do
+      else
+        puts "Does-nert-compert/
+        enter a valid option! zeep-berp-pop"
+        what_to_do
+        # create_new_user
+      end
   else
     puts "Does-nert-compert/
     enter a valid option! zeep-berp-pop"
@@ -24,40 +34,32 @@ def are_you_a_user
 end
 
 def what_to_do
-  puts "Oh hi! Thanks for coming in!"
-  puts "Please enter your username!"
-  input = gets.chomp
-  if User.where(username: "#{input}").count >= 1
-    @current_user_id = User.where(username: "#{input}").pluck(:id).first
-
-    puts "So #{input}, what whould you like to do?"
+    username = User.where(id: "#{@current_user_id}").pluck(:username).first
+    puts "So #{username}, what whould you like to do?"
       puts "press 1 to search menu"
       puts "press 2 to see your wishlist"
-      puts "press 3  to GTFO of 'ere"
-    input1 = gets.chomp
-    if input1 == "1"
+      puts "press 3 to GTFO of 'ere aka exit"
+    input = gets.chomp
+    if input == "1"
       search_menu
-    elsif input1 == "2"
+    elsif input == "2"
       display_wishlist
-    elsif input1 == "3"
+    elsif input == "3"
       puts "good-bye"
       exit
     else
+      puts "Are you already drunk!?
+      Choose from the menu please. :)"
       what_to_do
     end
-  else
-    puts "Does-nert-compert/
-    enter a valid option! zeep-berp-pop"
-    what_to_do
-    # create_new_user
-  end
 end
 
 def search_menu
   puts "How would like to search your brewery database?
           Press 1 to search by city
           Press 2 to search by state
-          Press 3 to search by brewery name"
+          Press 3 to search by brewery name
+          Press 4 to exit"
 
   input = gets.chomp
 
@@ -67,6 +69,8 @@ def search_menu
     search_breweries_by_state
   elsif input == "3"
     search_breweries_by_name
+  elsif input == "4"
+    exit
   else
     puts "Sorry I couldn't understand that...**mumble-grumble** please enter
     somthing from the selection menu."
@@ -77,6 +81,7 @@ end
 
 
 def get_wishlist  #creates a wishlist for the user
+  puts "Getting Wishlist..."
   wishlist_array = [] #holds all brewery information for wishlist
   user_wishlist = BreweryWishlist.where(user_id: @current_user_id) #array of users wishlist
 
@@ -85,11 +90,37 @@ def get_wishlist  #creates a wishlist for the user
     wishlist_array << Brewery.where(id: id_inquestion)
   end
    wishlist_array
+   wishlist_options
 end
+
+
+def wishlist_options
+  puts "What would you like to do with your wishlist?"
+  puts  "Press 1 to display your brewery wishlist.
+  Press 2 to delete a brewery from your wishlist.
+  Press 3 to add to your brewery wishlist.
+  Press 4 to exit."
+  input = gets.chomp
+
+  if input == "1"
+    display_wishlist
+  elsif input == "2"
+    #delete_brewery
+  elsif input == "3"
+    search_menu
+  elsif input == "4"
+    puts "Goodbye :)"
+    exit
+  else
+    puts "Stop playing around or i'll kick you out!"
+    wishlist_options
+  end
+end
+
 
 def display_wishlist  #prints out the wishlist for the user
   wishlist = get_wishlist
-  puts "Your Wishlist:"
+  puts "have wishlist"
   i = 1
     while i <= wishlist.length do
       wishlist.each do |brewery|
@@ -98,23 +129,18 @@ def display_wishlist  #prints out the wishlist for the user
         i += 1
       end
     end
-    wishlist
 end
 
-
-
-def get_brewery_and_delete #get brewery to delete and delete 
-  puts "Type the number of the brewery you'd like to delete from your wishlist"
-  wishlist = display_wishlist
-  user_delete_input = gets.chomp
-  index = user_delete_input.to_i - 1 #represents the index of the brewery that should be removed from wishlist
+def delete_brewery
   puts "Sad to see you delete a brewery!"
-  delete_id = wishlist[index][0]["id"] #brewery id that needs to be removed
+  brewery_delete = get_brewery_deletion
+end
 
-  delete_me = BreweryWishlist.where(user_id: @current_user_id, brewery_id: delete_id)
-  BreweryWishlist.destroy(delete_me)
-  puts "Wishlist Updated!"
-  #wishlist_options
+def get_brewery_deletion
+  puts "Type the number of the brewery you'd like to delete from your wishlist"
+  user_delete_input = gets.chomp
+  index = user_delete_input.to_i - 1
+  index #represents the index of the brewery that should be removed from wishlist
 end
 
 def get_brewery_selection #would user like to add a brewery to their wishlist
@@ -234,7 +260,7 @@ def add_to_wishlist
     user_id: @current_user_id,
     brewery_id: @brewery_id_to_add
     })
-    what_to_do
+    search_menu
 end
 
 Pry.start
