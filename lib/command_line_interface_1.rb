@@ -71,48 +71,18 @@ def search_menu
   elsif input == "3"
     search_breweries_by_name
   else
-    puts "Sorry I couldn't understand that...**mumble-grumble** please enter
+    puts "Sorry I counldn't understand that...**mumble-grumble** please enter
     somthing from the selection menu."
     search_menu
   end
 end
 
+def display_wishlist
+  puts "Here's your wishlist!"
 
-
-def get_wishlist  #creates a wishlist for the user
-  puts "Getting Wishlist..."
-  wishlist_array = [] #holds all brewery information for wishlist
-  user_wishlist = BreweryWishlist.where(user_id: @current_user_id) #array of users wishlist
-
-  user_wishlist.each do |brewery_object|
-    id_inquestion = brewery_object["brewery_id"]
-    wishlist_array << Brewery.where(id: id_inquestion)
-  end
-   wishlist_array
-end
-
-def display_wishlist  #prints out the wishlist for the user
-  wishlist = get_wishlist
-  puts "have wishlist"
-  i = 1
-    while i <= wishlist.length do
-      wishlist.each do |brewery|
-        puts "#{i}.  #{brewery.inspect} \n"
-        i += 1
-      end
-    end
-end
-
-def delete_brewery
-  puts "Sad to see you delete a brewery!"
-  brewery_delete = get_brewery_deletion
-end
-
-def get_brewery_deletion
-  puts "Type the number of the brewery you'd like to delete from your wishlist"
-  user_delete_input = gets.chomp
-  index = user_delete_input.to_i - 1
-  index #represents the index of the brewery that should be removed from wishlist
+  #we need to save the username input from the earlier welcome method in oreder
+  #to be used to search the brewery list db for the users list.
+  #We need to make this database!!
 end
 
 def get_brewery_selection #would user like to add a brewery to their wishlist
@@ -131,12 +101,11 @@ def search_breweries_by_city
     i = 1
       while i < breweries_by_city.length do
         breweries_by_city.each do |brewery|
-          puts "#{i}. #{brewery.inspect} \n"
-          puts 
+          puts "#{i}. #{brewery.inspect}"
           i += 1  #print out brewery in numbered list
         end
       end
-  elsif city_input.downcase == "exit"
+  elsif city_input.downcase == "exit" || city_input.downcase == "eXIT" || city_input.downcase == "exiT" || city_input.downcase == "exIT"
     exit
   else
     puts "Please check your spelling and try again! Thanks :)"
@@ -157,12 +126,11 @@ def search_breweries_by_state
     i = 1
       while i < breweries_by_state.length do
         breweries_by_state.each do |brewery|
-          puts "#{i}.  #{brewery.inspect} \n" #prints breweries in numbered list
-          puts
+          puts "#{i}.  #{brewery.inspect}" #prints breweries in numbered list
           i += 1
         end
       end
-  elsif state_input.downcase == "exit"
+  elsif state_input.downcase == "exit" || state_input.downcase == "eXIT" || state_input.downcase == "exiT" || state_input.downcase == "exIT"
     exit
   else
     puts "Please check your spelling and try again! Thanks :)"
@@ -177,18 +145,17 @@ end
 def search_breweries_by_name
   puts "What's the brewery name you want to search for?"
   name_input = gets.chomp #go back and revise to acoomodate abbreviations
-if breweries_by_name = Brewery.where(name: name_input).count >= 1
-  breweries_by_name = Brewery.where(name: name_input)
-  puts "Results Below:"
-  i = 1
-  while i <= breweries_by_name.length do
-    breweries_by_name.each do |brewery|
-      puts "#{i}.  #{brewery.inspect} \n"
-      puts
-      i += 1
+  if breweries_by_name = Brewery.where(name: name_input).count >= 1
+    breweries_by_name = Brewery.where(name: name_input)
+    puts "Results Below:"
+    i = 1
+    while i <= breweries_by_name.length do
+      breweries_by_name.each do |brewery|
+        puts "#{i}.  #{brewery.inspect}"
+        i += 1
+      end
     end
-  end
-  elsif name_input.downcase == "exit"
+  elsif name_input.downcase == "exit" || name_input.downcase == "eXIT" || name_input.downcase == "exiT" || name_input.downcase == "exIT"
     exit
   else
     puts "Please check your spelling and try again! Thanks :)"
@@ -228,9 +195,9 @@ end
 
 
 def add_to_wishlist
-  BreweryWishlist.create({
-    user_id: @current_user_id,
-    brewery_id: @brewery_id_add
+  newlist = BreweryWishlist.create({
+    brewery_id: @brewery_id_to_add,
+    user_id: @current_user_id
     })
 end
 
