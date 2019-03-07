@@ -137,7 +137,8 @@ def display_wishlist  #prints out the wishlist for the user
     i = 1
       while i <= wishlist.length do
         wishlist.each do |brewery|
-          puts "#{i}.  #{brewery.inspect} \n"
+          brewery_array = brewery.inspect.split(",")
+          puts "#{i}. #{brewery_array.join("\n")} \n"
           puts
           i += 1
         end
@@ -176,7 +177,8 @@ def display_wishlist_for_delete  #prints out the wishlist for the user
     i = 1
       while i <= wishlist.length do
         wishlist.each do |brewery|
-          puts "#{i}.  #{brewery.inspect} \n"
+          brewery_array = brewery.inspect.split(",")
+          puts "#{i}. #{brewery_array.join("\n")} \n"
           puts
           i += 1
         end
@@ -255,7 +257,8 @@ def search_breweries_by_state
     i = 1
       while i < breweries_by_state.length do
         breweries_by_state.each do |brewery|
-          puts "#{i}.  #{brewery.inspect} \n" #prints breweries in numbered list
+          brewery_array = brewery.inspect.split(",")
+          puts "#{i}. #{brewery_array.join("\n")} \n"
           puts
           i += 1
         end
@@ -282,7 +285,8 @@ if breweries_by_name = Brewery.where(name: name_input).count >= 1
   i = 1
   while i <= breweries_by_name.length do
     breweries_by_name.each do |brewery|
-      puts "#{i}.  #{brewery.inspect} \n"
+      brewery_array = brewery.inspect.split(",")
+      puts "#{i}. #{brewery_array.join("\n")} \n"
       puts
       i += 1
     end
