@@ -14,8 +14,14 @@ Welcome to the Brewery List Organizer! The intent of this application is to help
 note: if you wish to run the program another time, no need to run the first three commands. simply typing `ruby bin/run.rb` will start the program. 
 
 ## API
-This application utilizes the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
+This application accesses the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
 https://www.openbrewerydb.org/
+
+## Video Demonstration
+Click the link below for a brief video demonstration of this application.
+https://youtu.be/mwY10a3bq2A
+
+![Brewery List Organizer CLI Application](https://github.com/mollynemerever/module-one-final-project-brewery-list-organizer/blob/master/image/Image%203-7-19%20at%204.21%20PM.jpg)
 
 
 ## Authors
@@ -33,3 +39,12 @@ We welcome contributions! Please feel free to open a pull request or branch from
 ## Project Notes
 This application was the first project during the Flatiron School Software Engineering Immersive program. The project is the capstone of the first model within the curriculum. Primary focuses were: Object Oriented programming through Ruby, SQL, ORMs, and using ActiveRecord. We hope that this project displays our knowledge and proficency in these topics.  
 https://flatironschool.com/
+
+## License
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

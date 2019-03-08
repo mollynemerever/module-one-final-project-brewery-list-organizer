@@ -1,4 +1,4 @@
-# require 'pry'
+ require 'pry'
 require_relative "../config/environment.rb"
 
 @current_user_id = nil
@@ -22,6 +22,7 @@ def are_you_a_user
     puts
       if User.where(username: "#{input}").count >= 1
         @current_user_id = User.where(username: "#{input}").pluck(:id).first
+        system("clear")
         what_to_do
       else
         puts "Username not found! Are you sure you typed it correctly?"
@@ -224,8 +225,9 @@ def search_breweries_by_city
   puts "What city do you want to search by? (capitalize first letter)"
   city_input = gets.chomp #go back and revise to acoomodate up/downcase
   puts
+  system("clear")
   if breweries_by_city = Brewery.where(city: city_input).count >= 1 # is an array
-    breweries_by_city = Brewery.where(city: city_input)
+    breweries_by_city = Brewery.where(city: city_input).order(:state) #lists alphabetically by state
     puts "Results Below:"
     i = 1
       while i < breweries_by_city.length do
@@ -252,8 +254,9 @@ def search_breweries_by_state
   puts "What state do you want to search by? (full name & capitalization)"
   state_input = gets.chomp #go back and revise to accomodate abbreviations
   puts
+  system("clear")
   if breweries_by_state = Brewery.where(state: state_input).count >= 1
-    breweries_by_state = Brewery.where(state: state_input)
+    breweries_by_state = Brewery.where(state: state_input).order(:city) #lists alphabetically by city
     puts "Results Below:"
     i = 1
       while i < breweries_by_state.length do
@@ -280,8 +283,9 @@ def search_breweries_by_name
   puts "What's the brewery name you want to search for?"
   name_input = gets.chomp #go back and revise to acoomodate abbreviations
   puts
+  system("clear")
 if breweries_by_name = Brewery.where(name: name_input).count >= 1
-  breweries_by_name = Brewery.where(name: name_input)
+  breweries_by_name = Brewery.where(name: name_input).order(:state) #orders by state incase multiple results
   puts "Results Below:"
   i = 1
   while i <= breweries_by_name.length do
@@ -321,6 +325,7 @@ def create_new_user
   puts "Favorite Beer?"
   favorite_beer = gets.chomp
   puts
+  system("clear")
 
   user_object = User.create({
     username: username,
@@ -373,4 +378,4 @@ def breweries_by_populatiry
 end
 
 
-Pry.start
+#Pry.start
