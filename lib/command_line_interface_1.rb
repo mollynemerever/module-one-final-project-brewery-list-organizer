@@ -66,6 +66,7 @@ def search_menu
       Press: 1 to search by city
       Press: 2 to search by state
       Press: 3 to search by brewery name
+      Press: 4 to view our msot popular brewery
       Press: 4 to return to main menu
       Press: 5 to exit"
   puts
@@ -94,7 +95,6 @@ def get_wishlist  #creates a wishlist for the user
   wishlist_array = [] #holds all brewery information for wishlist
     user_wishlist = BreweryWishlist.where(user_id: @current_user_id) #array of users wishlist
     user_wishlist.each do |brewery_object|
-
       id_inquestion = brewery_object["brewery_id"]
       wishlist_array << Brewery.where(id: id_inquestion)
     end
@@ -185,6 +185,7 @@ def display_wishlist_for_delete  #prints out the wishlist for the user
       end
   else
     puts "Your wishlist is empty! Lets browse our brewery database and make one!"
+    puts
     search_menu
   end
   puts
@@ -333,8 +334,6 @@ def create_new_user
     what_to_do
 end
 
-
-
 def add_to_wishlist
   if BreweryWishlist.all.where(user_id: @current_user_id, brewery_id: @brewery_id_to_add).count < 1
   BreweryWishlist.create({
@@ -364,3 +363,14 @@ def add_another?
     puts "It's a yes or no question...or exit I guess"
   end
 end
+
+def breweries_by_populatiry
+  brewery_count = BreweryWishlist.group(:brewery_id).order('count_id DESC').count(:id).first
+  most_wli = BreweryWishlist.all.select do |brewery|
+      brewery.brewery_id == brewery_count[0]
+    end
+  most_pop = Brewery.where(id: most_wli.first["brewery_id"])
+end
+
+
+Pry.start
