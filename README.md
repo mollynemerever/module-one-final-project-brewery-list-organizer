@@ -21,6 +21,8 @@ https://www.openbrewerydb.org/
 Click the link below for a brief video demonstration of this application.
 https://youtu.be/mwY10a3bq2A
 
+![Brewery List Organizer CLI Application](https://github.com/mollynemerever/module-one-final-project-brewery-list-organizer/blob/master/image/Image%203-7-19%20at%204.21%20PM.jpg)
+
 
 ## Authors
 Anders Hornor - Flatiron School Seattle
