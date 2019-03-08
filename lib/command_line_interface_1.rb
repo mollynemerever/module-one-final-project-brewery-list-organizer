@@ -1,4 +1,4 @@
- require 'pry'
+ # require 'pry'
 require_relative "../config/environment.rb"
 
 @current_user_id = nil
@@ -67,9 +67,9 @@ def search_menu
       Press: 1 to search by city
       Press: 2 to search by state
       Press: 3 to search by brewery name
-      Press: 4 to view our msot popular brewery
-      Press: 4 to return to main menu
-      Press: 5 to exit"
+      Press: 4 to view our most popular brewery
+      Press: 5 to return to main menu
+      Press: 6 to exit"
   puts
   input = gets.chomp
   puts
@@ -80,8 +80,10 @@ def search_menu
   elsif input == "3"
     search_breweries_by_name
   elsif input == "4"
-    what_to_do
+    most_popular_brewery
   elsif input == "5"
+    what_to_do
+  elsif input == "6" || input.downcase == "exit"
     exit
   else
     puts "Sorry I couldn't understand that...**mumble-grumble** please enter something from the selection menu."
@@ -369,13 +371,31 @@ def add_another?
   end
 end
 
-def breweries_by_populatiry
+def most_popular_brewery
   brewery_count = BreweryWishlist.group(:brewery_id).order('count_id DESC').count(:id).first
   most_wli = BreweryWishlist.all.select do |brewery|
       brewery.brewery_id == brewery_count[0]
     end
   most_pop = Brewery.where(id: most_wli.first["brewery_id"])
+  brewery_array = most_pop[0].inspect.split(",")
+  puts "#{1}. #{brewery_array.join("\n")} \n"
+  puts
+  puts "Do you want to add this brewrey to your wishlist?(y/n/exit)"
+  puts
+  input = gets.chomp
+  puts
+    if input.downcase == "y" || input.downcase == "yes"
+      @brewery_id_to_add = most_pop["brewery_id"]
+      add_to_wishlist
+    elsif input.downcase == "n" || input.downcase == "no"
+      puts
+      search_menu
+    elsif input.downcase == "exit"
+      exit
+    else
+      search_menu
+    end
 end
 
 
-#Pry.start
+# Pry.start

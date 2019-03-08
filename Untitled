@@ -1,7 +1,0 @@
-def breweries_by_populatiry
-  brewery_count = BreweryWishlist.group(:brewery_id).order('count_id DESC').count(:id).first
-  most_wli = BreweryWishlist.all.select do |brewery|
-      brewery.brewery_id == brewery_count[0]
-    end
-  most_pop = Brewery.where(id: most_wli.first["brewery_id"])
-end
