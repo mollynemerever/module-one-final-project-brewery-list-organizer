@@ -42,7 +42,7 @@ def what_to_do
     username = User.where(id: "#{@current_user_id}").pluck(:username).first
     puts "So #{username}, what would you like to do?
 
-      Press: 1 to search menu and create a wishlist
+      Press: 1 to view search menu and create a wishlist
       Press: 2 to see your wishlist
       Press: 3 to exit"
       puts
@@ -52,7 +52,7 @@ def what_to_do
       search_menu
     elsif input == "2"
       display_wishlist
-    elsif input == "3"
+    elsif input == "3" || input.downcase == "exit"
       puts "Goodbye :)"
       exit
     else
@@ -84,6 +84,7 @@ def search_menu
   elsif input == "5"
     what_to_do
   elsif input == "6" || input.downcase == "exit"
+    "Goodbye :)"
     exit
   else
     puts "Sorry I couldn't understand that...**mumble-grumble** please enter something from the selection menu."
@@ -111,7 +112,8 @@ def wishlist_options
       Press: 1 to delete a brewery from your wishlist
       Press: 2 to search brewery database and add another brewery
       Press: 3 to go back to main menu
-      Press: 4 to exit"
+      Press: 4 to view your wishlist
+      Press: 5 to exit"
   puts
   input = gets.chomp
   puts
@@ -122,6 +124,8 @@ def wishlist_options
   elsif input == "3"
     what_to_do
   elsif input == "4"
+    display_wishlist
+  elsif input == "5" || input.downcase == "exit"
     puts "Goodbye :)"
     exit
   else
@@ -160,6 +164,9 @@ def get_brewery_and_delete #get brewery to delete and delete
   puts "Type the number of the brewery you'd like to delete from your wishlist"
     wishlist = display_wishlist_for_delete
     user_delete_input = gets.chomp
+    if user_delete_input == "exit"
+      what_to_do
+    end
     puts
     index = user_delete_input.to_i - 1 #represents the index of the brewery that should be removed from wishlist
   puts "Sad to see you delete a brewery!"
@@ -363,7 +370,7 @@ def add_another?
   if input.downcase == "y" || input.downcase == "yes"
     search_menu
   elsif input.downcase == "n" || nput.downcase == "no"
-    wishlist_options
+    display_wishlist
   elsif input.downcase == "exit"
     exit
   else
@@ -385,7 +392,7 @@ def most_popular_brewery
   input = gets.chomp
   puts
     if input.downcase == "y" || input.downcase == "yes"
-      @brewery_id_to_add = most_pop["brewery_id"]
+      @brewery_id_to_add = most_pop[0]["id"]
       add_to_wishlist
     elsif input.downcase == "n" || input.downcase == "no"
       puts
