@@ -14,7 +14,7 @@ Welcome to the Brewery List Organizer! The intent of this application is to help
 note: if you wish to run the program another time, no need to run the first three commands. simply typing `ruby bin/run.rb` will start the program. 
 
 ## API
-This application utilizes the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
+This application accesses the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
 https://www.openbrewerydb.org/
 
 ## Video Demonstration
