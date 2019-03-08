@@ -1,4 +1,4 @@
-# require 'pry'
+ require 'pry'
 require_relative "../config/environment.rb"
 
 @current_user_id = nil
@@ -224,7 +224,7 @@ def search_breweries_by_city
   city_input = gets.chomp #go back and revise to acoomodate up/downcase
   puts
   if breweries_by_city = Brewery.where(city: city_input).count >= 1 # is an array
-    breweries_by_city = Brewery.where(city: city_input)
+    breweries_by_city = Brewery.where(city: city_input).order(:state) #lists alphabetically by state
     puts "Results Below:"
     i = 1
       while i < breweries_by_city.length do
@@ -235,6 +235,7 @@ def search_breweries_by_city
           i += 1  #print out brewery in numbered list
         end
       end
+      binding.pry
   elsif city_input.downcase == "exit"
     exit
   else
@@ -252,7 +253,7 @@ def search_breweries_by_state
   state_input = gets.chomp #go back and revise to accomodate abbreviations
   puts
   if breweries_by_state = Brewery.where(state: state_input).count >= 1
-    breweries_by_state = Brewery.where(state: state_input)
+    breweries_by_state = Brewery.where(state: state_input).order(:city) #lists alphabetically by city
     puts "Results Below:"
     i = 1
       while i < breweries_by_state.length do
@@ -280,7 +281,7 @@ def search_breweries_by_name
   name_input = gets.chomp #go back and revise to acoomodate abbreviations
   puts
 if breweries_by_name = Brewery.where(name: name_input).count >= 1
-  breweries_by_name = Brewery.where(name: name_input)
+  breweries_by_name = Brewery.where(name: name_input).order(:state) #orders by state incase multiple results 
   puts "Results Below:"
   i = 1
   while i <= breweries_by_name.length do
@@ -364,3 +365,5 @@ def add_another?
     puts "It's a yes or no question...or exit I guess"
   end
 end
+
+Pry.start
