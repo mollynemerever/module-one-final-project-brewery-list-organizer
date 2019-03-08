@@ -17,6 +17,10 @@ note: if you wish to run the program another time, no need to run the first thre
 This application utilizes the free API from Open Brewery DB. Thank you for allowing us to utilize your resources!
 https://www.openbrewerydb.org/
 
+## Video Demonstration
+Click the link below for a brief video demonstration of this application.
+https://youtu.be/mwY10a3bq2A
+
 
 ## Authors
 Anders Hornor - Flatiron School Seattle
